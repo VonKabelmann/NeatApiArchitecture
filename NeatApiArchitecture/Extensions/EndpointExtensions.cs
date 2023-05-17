@@ -12,11 +12,8 @@ public static class EndpointExtensions
         app.MediateGet<GetAllPeopleRequest>("/people");
 
         app.MediateGet<GetPersonByIdRequest>("/people/{id}");
-        app.MapPost("/people", async (IRepository<Person> repo, Person person) =>
-        {
-            await repo.AddAsync(person);
-            return person;
-        }).WithOpenApi();
+
+        app.MediatePost<AddPersonRequest>("/people");
 
         return app;
     }
